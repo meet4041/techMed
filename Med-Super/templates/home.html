@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <title>techMed</title>
+
+    {{ owl_carousel_css_link | safe }} {{ font_awesome_css_link | safe }} {{
+    google_fonts_css_link | safe }}
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='styles/bootstrap.css') }}"
+    />
+    <link
+      href="{{ url_for('static', filename='styles/style.css') }}"
+      rel="stylesheet"
+    />
+    <link
+      href="{{ url_for('static', filename='styles/responsive.css') }}"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="sub_page">
+    <div class="hero_area">
+      <!-- Header section starts -->
+      <header class="header_section">
+        <div class="container-fluid">
+          <nav class="navbar navbar-expand-lg custom_nav-container pt-3">
+            <a class="navbar-brand" href="{{ url_for('home') }}">
+              <img src="{{ url_for('static', filename='logo.png') }}" alt="" />
+              <span> techMed </span>
+            </a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <div
+                class="d-flex flex-column flex-lg-row align-items-center w-100 justify-content-between"
+              >
+                <ul class="navbar-nav">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="{{ url_for('home') }}"
+                      >User <span class="sr-only">(current)</span></a
+                    >
+                  </li>
+                  <li class="nav-item active">
+                    <a class="nav-link" href="{{ url_for('chemist') }}"
+                      >Chemist</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </header>
+      <!-- End header section -->
+    </div>
+
+    <!-- Table -->
+    <h1 align="center" style="margin-top: 20px">
+      Total no. of user in <span style="color: red">techMed</span>
+    </h1>
+    <span class="aa">
+      <table border="1" align="center">
+        <tr>
+          <th>User_id</th>
+          <th>Username</th>
+          <th>Contact no.</th>
+          <th>Email</th>
+          <th>Password</th>
+          <th>Remove</th>
+          <!-- Add more headers for additional fields -->
+        </tr>
+        {% for document in data %}
+        <tr>
+          <td>{{ document._id }}</td>
+          <td>{{ document.username }}</td>
+          <td>{{ document.contact }}</td>
+          <td>{{ document.email }}</td>
+          <td>{{ document.password }}</td>
+          <td>
+            <form action="/remove_user" method="post">
+              <input type="hidden" name="id" value="{{ document._id }}" />
+              <button type="submit" class="remove-button">Remove</button>
+            </form>
+          </td>
+          <!-- Add more cells for additional fields -->
+        </tr>
+        {% endfor %}
+      </table>
+    </span>
+    <!-- End table -->
+
+    <!-- Footer section -->
+    <section class="container-fluid footer_section">
+      <p>&copy; 2024 All Rights Reserved techMed</p>
+    </section>
+    <!-- End Footer section -->
+  </body>
+</html>

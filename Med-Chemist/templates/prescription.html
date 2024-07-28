@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>techMed</title>
+
+    <style>
+      .aabb {
+        position: relative;
+        display: inline-block;
+        margin: 10px;
+        margin-top: 40px;
+        margin-left: 40px;
+      }
+
+      .aabb img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+      }
+
+      .aabb a {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: #dc3545;
+        color: #fff;
+        padding: 5px 10px;
+        text-decoration: none;
+        border-radius: 5px;
+      }
+
+      .aabb a:hover {
+        background-color: #c82333;
+      }
+
+      .abbc {
+        margin-top: 30px;
+        margin-bottom: 100px;
+      }
+      .abab{
+        margin-top: 20px;
+        margin-left: 50px;
+      }
+    </style>
+
+    {{ owl_carousel_css_link | safe }} {{ font_awesome_css_link | safe }} {{
+    google_fonts_css_link | safe }}
+
+    <!-- Bootstrap core CSS -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='styles/bootstrap.css') }}"
+    />
+    <!-- Custom styles for this template -->
+    <link
+      href="{{ url_for('static', filename='styles/style.css') }}"
+      rel="stylesheet"
+    />
+    <!-- Responsive style -->
+    <link
+      href="{{ url_for('static', filename='styles/responsive.css') }}"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="sub_page">
+    <div class="hero_area">
+      <!-- Header section starts -->
+      <header class="header_section">
+        <div class="container-fluid">
+          <nav class="navbar navbar-expand-lg custom_nav-container pt-3">
+            <a class="navbar-brand" href="{{ url_for('home') }}">
+              <img src="{{ url_for('static', filename='logo.png') }}" alt="" />
+              <span> techMed </span>
+            </a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <div
+                class="d-flex flex-column flex-lg-row align-items-center w-100 justify-content-between"
+              >
+                <ul class="navbar-nav">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="{{ url_for('home') }}"
+                      >Home <span class="sr-only">(current)</span></a
+                    >
+                  </li>
+                  <li class="nav-item active">
+                    <a class="nav-link" href="{{ url_for('stock') }}">Stock</a>
+                  </li>
+                  <li class="nav-item">
+                    <div class="dropdown">
+                      <button class="dropbtn">ORDERS ᐁ</button>
+                      <div class="dropdown-content">
+                        <a href="{{ url_for('order_update') }}"
+                          >Order received</a
+                        >
+                        <a href="{{ url_for('orders') }}">Prescription</a>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+                <div class="login_btn-contanier ml-0 ml-lg-5">
+                  <a href="{{ url_for('logout') }}">
+                    <img
+                      src="{{ url_for('static', filename='user.png') }}"
+                      alt=""
+                    />
+                    <span> Logout </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </header>
+      <!-- End header section -->
+    </div>
+
+    <!-- Photo Gallery -->
+
+    <!-- {% for token, orders in grouped_data.items() %}
+    <div class="aqz">
+      <h1 align="center">All prescription available</h1>
+
+      <h2 style="color: rgb(44, 44, 238)" class="abab">Token: {{ token }}</h2>
+
+      {% for photo_data in photos_data %}
+      <div class="aabb">
+        <img
+          src="data:image/jpeg;base64,{{ photo_data['photo'] }}"
+          alt="Photo"
+        />
+        <a href="{{ url_for('remove', photo_id=photo_data['_id']) }}"
+          >Remove Photo</a
+        >
+      </div>
+      {% endfor %} {% endfor %}
+    </div> -->
+
+    {% if grouped_data %} {% for token, photos in grouped_data.items() %}
+    <h2 style="color: rgb(44, 44, 238)" class="abab">Token: {{ token }}</h2>
+    <ul>
+      {% for photo in photos %}
+      <li>
+        <div class="aabb">
+          <img
+            src="data:image/png;base64, {{ photo.photo }}"
+            alt="Uploaded Photo"
+          />
+          <a href="{{ url_for('remove', photo_id=photo['_id']) }}"
+            >Remove Photo</a
+          >
+        </div>
+      </li>
+    </ul>
+    {% endfor %}
+    {% endfor %} 
+    {% endif %}
+
+    <!-- Info section -->
+    <span class="aws">
+      <section class="info_section layout_padding2">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="info_contact">
+                <h4>Contact</h4>
+                <div class="box">
+                  <div class="img-box">
+                    <img
+                      src="{{ url_for('static', filename='telephone-symbol-button.png') }}"
+                      alt=""
+                    />
+                  </div>
+                  <div>
+                    <h6>+91 6352314322</h6>
+                  </div>
+                </div>
+                <div class="box">
+                  <div class="img-box">
+                    <img
+                      src="{{ url_for('static', filename='email.png') }}"
+                      alt=""
+                    />
+                  </div>
+                  <div>
+                    <h6>mp16@gmail.com</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="info_menu">
+                <h4>Menu</h4>
+                <ul class="navbar-nav">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="{{ url_for('home') }}"
+                      >Home <span class="sr-only">(current)</span></a
+                    >
+                  </li>
+                  <li class="nav-item active">
+                    <a class="nav-link" href="{{ url_for('stock') }}">Stock</a>
+                  </li>
+                  <li class="nav-item active">
+                    <a class="nav-link" href="{{ url_for('order_update') }}"
+                      >Medicine order</a
+                    >
+                  </li>
+                  <li class="nav-item active">
+                    <a class="nav-link" href="{{ url_for('orders') }}"
+                      >Photo order</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </span>
+    <!-- End info section -->
+
+    <!-- footer section -->
+    <section class="container-fluid footer_section">
+      <p>&copy; 2024 All Rights Reserved techMed</p>
+    </section>
+    <!-- footer section -->
+  </body>
+</html>
